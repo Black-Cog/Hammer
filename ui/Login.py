@@ -28,6 +28,7 @@ class Login():
 		# buttons init
 		button_log = Abutton( name='Sign in', cmd=cmd, w=260, h=35 )
 
+		# defind layouts content
 		layout_main.add( [text_login,    self.textfield_login] )
 		layout_main.add( [text_password, self.textfield_password] )
 		layout_main.add( button_log )

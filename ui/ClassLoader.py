@@ -7,7 +7,7 @@ import Hammer.core
 class ClassLoader():
 
 	def __init__(self):
-		# self.login()
+		# load login ui
 		self.login = Login.Login( cmd=self.log )
 
 	def app( self ):
@@ -23,11 +23,11 @@ class ClassLoader():
 			if self.checkLogin( login=login, password=password ) :
 				message  = 'login success'
 				self.ui()
-		 	else : message = 'login failed'
-	 	else : message = 'Login or/and password are empty.'
+			else : message = 'login failed'
+		else : message = 'Login or/and password are empty.'
 
-	 	# feedback text
-	 	self.login.text_feedback.setText( message )
+		# feedback text
+		self.login.text_feedback.setText( message )
 
 	@staticmethod
 	def checkLogin( login, password ):
