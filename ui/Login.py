@@ -1,36 +1,34 @@
 
-import sys, os
-sys.path.append( '/'.join( os.path.dirname(__file__).split('\\')[:-2] ) )
-from PySide import QtCore, QtGui
 import Anvil.core
-
 
 class Login():
 	"""docstring for Login"""
-	def __init__(self):
+	def __init__( self, cmd=None ):
+
 		# defind class
 		Awindow    = Anvil.core.Window
-		Abutton    = Anvil.core.Button
+		Alayout    = Anvil.core.Layout
+		Atext      = Anvil.core.Text
 		Atextfield = Anvil.core.Textfield
-		Atext      = Anvil.core.Text 
+		Abutton    = Anvil.core.Button
 
-		# defin UI elements
-		self.window        = Awindow( title='Hammer Login' )
-		button_stat        = Abutton( name='Sign in', cmd=self.toto )
-		text_login         = Atext( text='login : ' )
-		text_password      = Atext( text='Password : ' )
-		textfield_login    = Atextfield()
-		textfield_password = Atextfield()
+		# window init
+		self.window = Awindow( title='Hammer Login', size=[ 640, 480 ] )
+		layout_main = Alayout( parent=self.window, x=self.window.geometry().width()/2-130, y=self.window.geometry().height()/2-50 )
 
-		# defind layout
-		self.window.addChild( text_login )
-		self.window.addChild( textfield_login )
-		self.window.addChild( text_password )
-		self.window.addChild( textfield_password )
-		self.window.addChild( button_stat )
+		# texts init
+		text_login         = Atext( text='Login        :', w=55 )
+		text_password      = Atext( text='Password :'    , w=55 )
+		self.text_feedback = Atext( text='', w=260 )
 
-	def toto( self ):
-		print 'login'
+		# textfields init
+		self.textfield_login    = Atextfield( text='', w=195 )
+		self.textfield_password = Atextfield( text='', w=195 )
 
-	def create(self):
-		return self.window
+		# buttons init
+		button_log = Abutton( name='Sign in', cmd=cmd, w=260, h=35 )
+
+		layout_main.add( [text_login,    self.textfield_login] )
+		layout_main.add( [text_password, self.textfield_password] )
+		layout_main.add( button_log )
+		layout_main.add( self.text_feedback )
