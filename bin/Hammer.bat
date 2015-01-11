@@ -1,1 +1,1 @@
-c:\Python27\python.exe ClassLoader.py
+C:\Python27\python.exe launchHammer.py
