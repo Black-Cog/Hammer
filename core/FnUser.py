@@ -1,9 +1,14 @@
 
+# import Forge
+
 class FnUser():
 	"""docstring for FnUser"""
 	
 	@staticmethod
 	def getUserName():
+		# Fdatabase = Forge.core.Database()
+		# username = Fdatabase.select()
+		# return username
 		return 'User               : %s' %( 'Launay Cedric' )
 	
 	@staticmethod
