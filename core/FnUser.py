@@ -1,10 +1,7 @@
 import sys
-# import Forge
-sys.path.append('/home/Documents/Forge')
 import Forge.core
-database = Forge.core.Database()
 
-class FnUser():
+class FnUser(object):
 	"""docstring for FnUser"""
 	
 	@staticmethod
@@ -13,7 +10,8 @@ class FnUser():
 		'@parameter string login User login.'
 		'@parameter string password User password'
 
-		database.connection('localhost', 'forge', '1994', 'bc_forge')
+		database = Forge.core.Database()
+		database.connection('localhost', 'root', '', 'bc_forge')
 		conditionData = [login, password]
 		queryList = database.select('*', 'users', 'user_name=%s AND password=PASSWORD(%s)', conditionData)
 		result = "false"
@@ -27,6 +25,34 @@ class FnUser():
 
 		database.close() #Connection end
 		return result
+
+	def log( self, arg ):
+		login    = arg.login.textfield_login.text()
+		password = arg.login.textfield_password.text()
+
+		if login and password:
+			if self.checkLogin( login=login, password=password ) :
+				message  = 'login success'
+				arg.ui()
+			else : message = 'login failed'
+		else : message = 'Login or/and password are empty.'
+
+		# feedback text
+		arg.login.text_feedback.setText( message )
+
+	@staticmethod
+	def checkLogin( login, password ):
+		# mysql call here
+		# fake value
+		loginArray    = ['toto', 'tata', 'clipo', 'cedric', 'sebastien']
+		passwordArray = ['toto', 'tata', 'clipo', 'sebastien', 'cedric']
+		check = False
+
+		if login in loginArray:
+			index = loginArray.index( login )
+			if password == passwordArray[ index ] : check = True
+
+		return check
 
 	@staticmethod
 	def getUserName():

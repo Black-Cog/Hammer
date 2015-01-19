@@ -7,42 +7,15 @@ import Hammer.core
 class ClassLoader():
 
 	def __init__(self):
+
+		# actions init
+		log = lambda: Hammer.core.FnUser().log( self )
+		
 		# load login ui
-		self.login = Login.Login( cmd=self.log )
+		self.login = Login.Login( cmd=log )
 
 	def app( self ):
 		return self.login.window
-
-
-	def log( self ):
-
-		login    = self.login.textfield_login.text()
-		password = self.login.textfield_password.text()
-
-		if login and password:
-			if self.checkLogin( login=login, password=password ) :
-				message  = 'login success'
-				self.ui()
-			else : message = 'login failed'
-		else : message = 'Login or/and password are empty.'
-
-		# feedback text
-		self.login.text_feedback.setText( message )
-
-	@staticmethod
-	def checkLogin( login, password ):
-		# mysql call here
-		# fake value
-		loginArray    = ['toto', 'tata', 'clipo', 'cedric', 'sebastien']
-		passwordArray = ['toto', 'tata', 'clipo', 'sebastien', 'cedric']
-		check = False
-
-		if login in loginArray:
-			index = loginArray.index( login )
-			if password == passwordArray[ index ] : check = True
-
-		return check
-
 
 	def ui( self ):
 		from PySide import QtGui, QtCore
