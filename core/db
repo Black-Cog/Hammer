@@ -1,0 +1,3 @@
+{'entityId':1, 'name':'root', 'type':'BaseEntity', 'path':None,  'version':1, 'parentId':None, 'childrenId':[2,3], 'assetId':None, 'copyId':None, 'referenceId':None, 'masterAssetId':None, 'dependencyId':None, 'bundleId':None,'sources':None, }
+{'entityId':2, 'name':'compoShot0010', 'type':'Compo', 'path':None,  'version':1, 'parentId':None, 'childrenId':[], 'assetId':None, 'copyId':None, 'referenceId':None, 'masterAssetId':None, 'dependencyId':None, 'bundleId':None,'sources':None, }
+{'entityId':3, 'name':'compoShot0020', 'type':'Compo', 'path':None,  'version':1, 'parentId':None, 'childrenId':[], 'assetId':None, 'copyId':None, 'referenceId':None, 'masterAssetId':None, 'dependencyId':None, 'bundleId':None, 'sources':None, }
