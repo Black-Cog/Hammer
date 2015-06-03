@@ -5,19 +5,19 @@ class BaseEntity():
 
 	def __init__(
 				self,
-				entityId,
-				name,
-				path,
-				version,
-				parentId,
-				childrenId,
-				copyId,
-				referenceId,
-				assetId,
-				masterAssetId,
-				dependencyId,
-				bundleId,
-				sources,
+				entityId=None,
+				name=None,
+				path=None,
+				version=None,
+				parentId=None,
+				childrenId=None,
+				copyId=None,
+				referenceId=None,
+				assetId=None,
+				masterAssetId=None,
+				dependencyId=None,
+				bundleId=None,
+				sources=None,
 				):
 
 		self.__entityId = entityId
@@ -34,6 +34,11 @@ class BaseEntity():
 		self.__bundleId = bundleId
 		self.__sources = sources
 
+	def getType( self ):
+		'''
+		Return the type of the current entity.
+		'''
+		return self.__class__.__name__
 
 	def getEntityId( self ):
 		'''
