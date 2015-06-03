@@ -43,7 +43,7 @@ class ClassLoader():
 		# tabs init
 		tab_main = Atab( parent=self.window, tabs=[ 'User', 'Project', 'Farm', 'Wiki', 'Administration', 'Paperwork', 'Budjet', 'Hiring' ] )
 
-		# currentWidget()
+		# set currentWidget
 		tab_main.setCurrentWidget( tab_main.widget(1) )
 
 		############
@@ -83,7 +83,7 @@ class ClassLoader():
 		layout_project = Alayout( parent=tab_main.widget(1) )
 
 		# textfields init
-		self.textfield_urlPath = Atextfield( text='/', w=350 )
+		self.textfield_urlPath = Atextfield( text='/', w=480 )
 
 		# actions init
 		upFolder = lambda: Hammer.core.FnProject().upFolder( self )
@@ -96,19 +96,56 @@ class ClassLoader():
 		layout_project.add( [button_up, button_set, self.textfield_urlPath] )
 
 		# build entity UI
-		for entityUI in self._buildEntityUI():
-			layout_project.add( entityUI )
+		layout_project.add( self._buildEntityUI() )
 
 		self.window.show()
-		# self.window.showMaximized()
 
 	def _buildEntityUI( self, entityId=1 ):
 		entity = Hammer.core.getEntity( entityId )
 
-		textList = []
-		# texts init
-		for childId in entity.getChildrenId():
-			child = Hammer.core.getEntity( childId )
-			textList.append( Anvil.core.Text(text=child.getName(), w=200) )
+		# todo : replace by a Forge function
+		import os
+		currentPath = os.path.dirname(os.path.realpath(__file__))
 
-		return textList
+		hierarchyList = []
+
+		def setHierarchyList( childrenIds, parentId ):
+			for childrenId in childrenIds:
+				child = Hammer.core.getEntity( childrenId )
+				entityType = child.getType()
+
+				parent = None
+				if parentId:
+					parent = Hammer.core.getEntity( parentId ).getName()
+
+				hierarchyList.append( 	{
+										'name':child.getName(),
+										'id':childrenId,
+										'iconPath':'%score/icon/%s%s.png' %( currentPath.replace( '\\', '/' )[:-2], entityType[0].lower(), entityType[1:] ),
+										'tooltip':'%s | entityId:%s, name:%s, assetId:%s' %( child.getType(), child.getEntityId(), child.getName(), child.getAssetId() ),
+										'iconTooltip':'type:%s' %( child.getType() ),
+										'parent':parent,
+										'parentId':parentId,
+										} )
+
+				subChildren = child.getChildrenId()
+				child.getParentId()
+				if subChildren:
+					setHierarchyList( subChildren, childrenId )
+
+		setHierarchyList( entity.getChildrenId(), None )
+
+		# tree init
+		tree_hierarchy = Anvil.core.Tree( w=550, h=400 )
+		tree_hierarchy.add( hierarchyList )
+
+		# signals
+		menuBar = lambda: self.menuBar( tree_hierarchy )
+		tree_hierarchy.signalKeySpacePress.connect( menuBar )
+
+		return tree_hierarchy
+
+	def menuBar( self, tree ):
+		entityId = tree.getCurrentItemId()
+		entity = Hammer.core.getEntity( entityId )
+		print entity.getName()
