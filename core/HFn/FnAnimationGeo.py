@@ -9,14 +9,14 @@ class FnAnimationGeo( FnBaseEntity.FnBaseEntity ):
 		self._fn.append( self.importEntity )
 		self._fn.append( self.openSourceScene )
 
-	def publish( self ):
-		print 'publish'
+	def publish( self, entity ):
+		print 'publish : %s' %( str(entity) )
 
-	def get( self ):
-		print 'get'
+	def get( self, entity ):
+		print 'get : %s' %( str(entity) )
 
-	def importEntity( self ):
-		print 'importEntity'
+	def importEntity( self, entity ):
+		print 'importEntity : %s' %( str(entity) )
 
-	def openSourceScene( self ):
-		print 'openSourceScene'
+	def openSourceScene( self, entity ):
+		print 'openSourceScene : %s' %( str(entity) )
