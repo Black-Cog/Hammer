@@ -39,35 +39,16 @@ def getEntity( entityId ):
 
 	return None
 
+def getActions( entity ):
+	'''
+	Return the list of action for the entity.
+	'''
 
+	import HFn
 
+	entityType = entity.getType()
 
-# todo : Refactor and move into python/Hammer/Actions
-class HammerActions():
-	"""docstring for HammerActions"""
-	
-	@staticmethod
-	def mail():
-		print 'email forwarded'
-
-	@staticmethod
-	def launchPublish( filename2=None, classname2=None ):
-		import sys
-		sys.path.append( 'F:/dev/Hammer/maya/actions/' )
-
-		filename  = 'FnPublishModelingPrint'
-		classname = 'Modeling'
-		importcmd   = 'from %s import %s' %( filename, classname )
-		instancecmd = 'inst = %s()' %( classname )
-
-		exec( importcmd )
-		exec( instancecmd )
-
-		instMethods = dir( inst )
-
-
-		if 'verification' in instMethods:
-			print 'verification'
-
-		if 'publish' in instMethods:
-			print 'publish'
+	for fnMethod in dir( HFn ):
+		if fnMethod == 'Fn%s' %( entityType ):
+			classFn = eval( 'HFn.%s' %(fnMethod) )
+			return classFn()._fn
