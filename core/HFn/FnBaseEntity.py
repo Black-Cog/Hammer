@@ -8,11 +8,11 @@ class FnBaseEntity():
 					self.rename,
 					]
 
-	def property( self ):
-		print 'property'
+	def property( self, entity ):
+		print 'property : %s' %( str(entity) )
 
-	def delete( self ):
-		print 'delete'
+	def delete( self, entity ):
+		print 'delete : %s' %( str(entity) )
 
-	def rename( self ):
-		print 'rename'
+	def rename( self, entity ):
+		print 'rename : %s' %( str(entity) )

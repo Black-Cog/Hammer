@@ -7,8 +7,8 @@ class FnBundle( FnBaseEntity.FnBaseEntity ):
 		self._fn.append( self.publish )
 		self._fn.append( self.get )
 
-	def publish( self ):
-		print 'publish'
+	def publish( self, entity ):
+		print 'publish : %s' %( str(entity) )
 
-	def get( self ):
-		print 'get'
+	def get( self, entity ):
+		print 'get : %s' %( str(entity) )

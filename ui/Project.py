@@ -88,7 +88,7 @@ class Project():
 			parent.clean()
 			if actions:
 				for action in actions:
-					parent.add( Anvil.core.Button(name=action.__name__, cmd=action, w=110) )
+					parent.add( Anvil.core.Button(name=action.__name__, cmd=lambda: action(entity), w=110) )
 
 	def menuBar( self, tree ):
 		entityId = tree.getCurrentItemId()
