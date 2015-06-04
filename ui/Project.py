@@ -2,6 +2,9 @@
 import Anvil.core
 import Hammer.core
 
+# todo : push that into Forge
+import functools
+
 class Project():
 	def __init__( self, parent ):
 
@@ -88,7 +91,7 @@ class Project():
 			parent.clean()
 			if actions:
 				for action in actions:
-					parent.add( Anvil.core.Button(name=action.__name__, cmd=lambda: action(entity), w=110) )
+					parent.add( Anvil.core.Button(name=action.__name__, cmd=functools.partial(action, entity), w=110) )
 
 	def menuBar( self, tree ):
 		entityId = tree.getCurrentItemId()
