@@ -1,7 +1,7 @@
 import sys
 import Forge.core
 
-class FnUser(object):
+class FnUser():
 	"""docstring for FnUser"""
 	
 	@staticmethod

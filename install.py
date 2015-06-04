@@ -52,6 +52,8 @@ curentPath = os.path.dirname(os.path.realpath(__file__))
 binDir              = 'bin'
 coreDir             = 'core'
 coreEntityTypeDir   = 'core/EntityType'
+coreHFnDir          = 'core/HFn'
+coreActionsDir      = 'core/Actions'
 coreIconDir         = 'core/icon'
 corePythonHammerDir = 'core/python/Hammer'
 coreMayaActionsDir  = 'maya/actions'
@@ -64,6 +66,8 @@ for folder in 	[
 					uiDir,
 					binDir,
 					coreEntityTypeDir,
+					coreHFnDir,
+					coreActionsDir,
 					coreIconDir,
 					corePythonHammerDir,
 					coreMayaActionsDir,
@@ -83,6 +87,8 @@ for folder in 	[
 					uiDir,
 					binDir,
 					coreEntityTypeDir,
+					coreHFnDir,
+					coreActionsDir,
 					coreIconDir,
 					corePythonHammerDir,
 					coreMayaActionsDir,

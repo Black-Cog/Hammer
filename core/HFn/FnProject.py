@@ -4,9 +4,17 @@ import Forge.core
 class FnProject(object):
 	"""docstring for FnProject"""
 	
-	def upFolder( self, arg ):
+	@staticmethod
+	def upFolder( arg ):
 		path = arg.textfield_urlPath.text()
 
 		print path
 		# feedback text
 		# arg.login.text_feedback.setText( message )
+
+	@staticmethod
+	def getActions( entity ):
+		entityType = entity.getType()
+
+
+
