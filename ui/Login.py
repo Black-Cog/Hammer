@@ -13,7 +13,7 @@ class Login():
 		Abutton    = Anvil.core.Button
 
 		# window init
-		self.window = Awindow( title='Hammer Login', size=[ 640, 480 ] )
+		self.window = Awindow( title='Hammer Login', size=[ 640, 480 ], menuBar=False )
 		layout_main = Alayout( parent=self.window, x=self.window.geometry().width()/2-130, y=self.window.geometry().height()/2-50 )
 
 		# texts init
