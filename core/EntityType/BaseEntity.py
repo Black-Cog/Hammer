@@ -34,6 +34,50 @@ class BaseEntity():
 		self.__bundleId = bundleId
 		self.__sources = sources
 
+	def __getitem__(self, key):
+		if key == 'entityType':
+			return self.getType()
+
+		elif key == 'name':
+			return self.getName()
+
+		elif key == 'entityId':
+			return self.getEntityId()
+
+		elif key == 'path':
+			return self.getPath()
+
+		elif key == 'version':
+			return self.getVersion()
+
+		elif key == 'parentId':
+			return self.getParentId()
+
+		elif key == 'childrenId':
+			return self.getChildrenId()
+
+		elif key == 'copyId':
+			return self.getCopyId()
+
+		elif key == 'referenceId':
+			return self.getReferenceId()
+
+		elif key == 'assetId':
+			return self.getAssetId()
+
+		elif key == 'masterAssetId':
+			return self.getMasterAssetId()
+
+		elif key == 'dependencyId':
+			return self.getDependencyId()
+
+		elif key == 'bundleId':
+			return self.getBundleId()
+
+		elif key == 'source':
+			return self.getSource()
+
+
 	def getType( self ):
 		'''
 		Return the type of the current entity.
