@@ -4,8 +4,8 @@ import Anvil.core
 import WindowPopup
 
 class WindowAsk( WindowPopup.WindowPopup ):
-	def __init__( self, title='Ask', size=[ 500, 100 ], issue='Are you sure?', cmdYes=None, cmdNo=None ):
-		self.init( title=title, size=size )
+	def __init__( self, title='Ask', size=[ 500, 100 ],iconPath=None, issue='Are you sure?', cmdYes=None, cmdNo=None ):
+		self.init( title=title, iconPath=iconPath, size=size )
 
 		self.__cmdYes = cmdYes
 		self.__cmdNo = cmdNo

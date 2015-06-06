@@ -4,12 +4,12 @@ import Anvil.core
 import WindowPopup
 
 class WindowProperty( WindowPopup.WindowPopup ):
-	def __init__( self, title=None, size=[ 350, 450 ], entity=None ):
+	def __init__( self, title=None, iconPath=None, size=[ 350, 450 ], entity=None ):
 
 		if not title:
 			title = 'Property of entity : %i' %( entity['entityId'] )
 
-		self.init( title=title, size=size )
+		self.init( title=title, iconPath=iconPath, size=size )
 
 		# defind class
 		Atext = Anvil.core.Text
