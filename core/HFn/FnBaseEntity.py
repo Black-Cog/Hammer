@@ -1,4 +1,6 @@
 
+import Hammer.core.Actions
+
 class FnBaseEntity():
 
 	def initFn( self ):
@@ -9,10 +11,10 @@ class FnBaseEntity():
 					]
 
 	def property( self, entity ):
-		print 'property : %s' %( str(entity) )
+		self.baseEntityProperty = Hammer.core.Actions.BaseEntityProperty( ui=True, entity=entity )
 
 	def delete( self, entity ):
-		print 'delete : %s' %( str(entity) )
+		self.baseEntityProperty = Hammer.core.Actions.BaseEntityDelete( ui=True, entity=entity )
 
 	def rename( self, entity ):
 		print 'rename : %s' %( str(entity) )

@@ -1,4 +1,6 @@
 
+import Hammer.core
+
 import FnBaseEntity
 
 class FnLight( FnBaseEntity.FnBaseEntity ):
@@ -19,4 +21,4 @@ class FnLight( FnBaseEntity.FnBaseEntity ):
 		print 'importEntity : %s' %( str(entity) )
 
 	def openSourceScene( self, entity ):
-		print 'openSourceScene : %s' %( str(entity) )
+		self.baseEntityProperty = Hammer.core.Actions.BaseEntityOpenSourceScene( ui=True, entity=entity )
