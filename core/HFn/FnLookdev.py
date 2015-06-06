@@ -1,4 +1,5 @@
 
+import Forge.core
 import Hammer.core
 
 import FnBaseEntity
@@ -6,9 +7,14 @@ import FnBaseEntity
 class FnLookdev( FnBaseEntity.FnBaseEntity ):
 	def __init__( self ):
 		self.initFn()
-		self._fn.append( self.publish )
-		self._fn.append( self.get )
-		self._fn.append( self.importEntity )
+
+		interpreter = Forge.core.System().interpreter()
+
+		if interpreter == 'maya':
+			self._fn.append( self.publish )
+			self._fn.append( self.get )
+			self._fn.append( self.importEntity )
+
 		self._fn.append( self.openSourceScene )
 
 	def publish( self, entity ):
