@@ -4,8 +4,8 @@ import Anvil.core
 import WindowPopup
 
 class WindowInfo( WindowPopup.WindowPopup ):
-	def __init__( self, title='Ask', size=[ 500, 100 ], info='Infomation.' ):
-		self.init( title=title, size=size )
+	def __init__( self, title='Ask', iconPath='../core/icon/warning.png', size=[ 500, 100 ], info='Infomation.' ):
+		self.init( title=title, iconPath=iconPath, size=size )
 
 		# layout init
 		layout_main = Anvil.core.Layout( parent=self.window )

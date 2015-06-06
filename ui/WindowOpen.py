@@ -4,12 +4,12 @@ import Anvil.core
 import WindowPopup
 
 class WindowOpen( WindowPopup.WindowPopup ):
-	def __init__( self, title=None, size=[ 400, 100 ], entity=None, cmd=None ):
+	def __init__( self, title=None, iconPath=None, size=[ 400, 100 ], entity=None, cmd=None ):
 
 		if not title:
 			title = 'Open entity : %i' %( entity['entityId'] )
 
-		self.init( title=title, size=size )
+		self.init( title=title, iconPath=iconPath, size=size )
 
 		self.__cmd = cmd
 

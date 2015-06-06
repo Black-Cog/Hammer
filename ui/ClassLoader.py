@@ -28,7 +28,7 @@ class ClassLoader():
 		# self.login.window.hide()
 
 		# window init
-		self.window = Anvil.core.Window( title='Hammer', size=[ 640, 480 ], menuBar=False )
+		self.window = Anvil.core.Window( title='Hammer', iconPath='../core/icon/hammer.png', size=[ 640, 480 ], menuBar=False )
 
 		# tabs init
 		tab_main = Anvil.core.Tab(
