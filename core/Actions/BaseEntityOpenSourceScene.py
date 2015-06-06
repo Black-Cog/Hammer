@@ -1,5 +1,7 @@
 
 import functools
+import subprocess
+import os
 
 import BaseAction
 
@@ -15,6 +17,23 @@ class BaseEntityOpenSourceScene( BaseAction.BaseAction ):
 		self.popup.show()
 
 	def _doAction( self, entity ):
-		print 'Open Source Scene'
-		print entity['source']
+		path = entity['source']
 
+		if path and os.path.exists( path ):
+			extension = path.split( '.' )[-1]
+
+			if extension == 'nk':
+				subprocess.call( ['c:/Program Files/Nuke8.0v3/Nuke8.0.exe', path] )
+
+			elif extension == 'ma':
+				subprocess.call( ['c:/Program Files/Autodesk/Maya2015/bin/maya.exe', path] )
+
+			else :
+				import Hammer.ui
+				self.popup = Hammer.ui.WindowInfo( title='Warning', info='The extension %s is unknow.' %(extension) )
+				self.popup.show()
+
+		else :
+			import Hammer.ui
+			self.popup = Hammer.ui.WindowInfo( title='Warning', info='No file found at this location : %s.' %(path) )
+			self.popup.show()
