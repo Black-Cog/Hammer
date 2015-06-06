@@ -7,3 +7,4 @@ from WindowAsk import WindowAsk
 from WindowProperty import WindowProperty
 from WindowPublish import WindowPublish
 from WindowOpen import WindowOpen
+from WindowInfo import WindowInfo
