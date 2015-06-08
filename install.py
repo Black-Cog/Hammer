@@ -1,4 +1,4 @@
-import subprocess
+
 import shlex
 import os
 import sys
@@ -48,7 +48,7 @@ softwarePath = '%s%s/' %( softwareEnvironment, softwareName )
 ###############################################################################################
 
 
-curentPath = os.path.dirname(os.path.realpath(__file__))
+curentPath = Forge.core.System.getPath( __file__ )
 binDir              = 'bin'
 coreDir             = 'core'
 coreEntityTypeDir   = 'core/EntityType'

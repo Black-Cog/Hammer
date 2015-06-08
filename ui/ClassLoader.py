@@ -4,10 +4,15 @@ import Anvil.core
 import Login
 import Hammer.core
 import Hammer.ui
+import Forge.core.System
 
 class ClassLoader():
 
 	def __init__(self):
+
+		# set env
+		currentPath = Forge.core.System.getPath( __file__ )
+		Forge.core.System.setEnv( currentPath )
 
 		# todo : reimplement login : actions init
 		# log = lambda: Hammer.core.HFn.FnUser().log( self )

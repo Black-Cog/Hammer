@@ -29,10 +29,7 @@ def getEntity( entityId ):
 	Return the entity based on the id.
 	'''
 
-	import os
-	currentPath = os.path.dirname( os.path.realpath(__file__) )
-
-	for i in open( currentPath + "/db", "r"):
+	for i in open( "../core/db", "r"):
 		dbEntityInfo = eval(i)
 		if dbEntityInfo['entityId'] == entityId:
 			return __getEntityType( dbEntityInfo )

@@ -1,8 +1,5 @@
 
-import functools
-import subprocess
-import os
-
+import Forge.core.Process
 import BaseAction
 
 class BaseEntityOpenSourceScene( BaseAction.BaseAction ):
@@ -11,7 +8,7 @@ class BaseEntityOpenSourceScene( BaseAction.BaseAction ):
 		import Hammer.ui
 		self.popup = Hammer.ui.WindowOpen(
 			entity=entity,
-			cmd=functools.partial( self._doAction, entity ),
+			cmd=Forge.core.Process.partial( self._doAction, entity ),
 		 )
 
 		self.popup.show()
@@ -19,18 +16,18 @@ class BaseEntityOpenSourceScene( BaseAction.BaseAction ):
 	def _doAction( self, entity ):
 		path = entity['source']
 
-		if path and os.path.exists( path ):
-			extension = path.split( '.' )[-1]
+		if path and Forge.core.System.exists( path ):
+			extension = Forge.core.System.getExtension( path )
 
 			if extension == 'nk':
-				subprocess.call( ['c:/Program Files/Nuke8.0v3/Nuke8.0.exe', path] )
+				Forge.core.Process.launchSoftware( 'c:/Program Files/Nuke8.0v3/Nuke8.0.exe', arg=path )
 
 			elif extension == 'ma':
-				subprocess.call( ['c:/Program Files/Autodesk/Maya2015/bin/maya.exe', path] )
+				Forge.core.Process.launchSoftware( 'c:/Program Files/Autodesk/Maya2015/bin/maya.exe', arg=path )
 
 			else :
 				import Hammer.ui
-				self.popup = Hammer.ui.WindowInfo( title='Warning', info='The extension %s is unknow.' %(extension) )
+				self.popup = Hammer.ui.WindowInfo( title='Warning', info='The extension "%s" is unknow.' %(extension) )
 				self.popup.show()
 
 		else :
