@@ -1,5 +1,5 @@
 
-import functools
+import Forge.core.Process
 
 import BaseAction
 
@@ -9,7 +9,7 @@ class HdrPublish( BaseAction.BaseAction ):
 		import Hammer.ui
 		self.popup = Hammer.ui.WindowPublish(
 			entity=entity,
-			cmd=functools.partial( self._doAction, entity ),
+			cmd=Forge.core.Process.partial( self._doAction, entity ),
 		 )
 
 		self.popup.show()

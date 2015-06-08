@@ -1,7 +1,6 @@
 
 import BaseAction
-import functools
-
+import Forge.core.Process
 
 class BaseEntityDelete( BaseAction.BaseAction ):
 
@@ -10,7 +9,7 @@ class BaseEntityDelete( BaseAction.BaseAction ):
 		self.popup = Hammer.ui.WindowAsk(
 			title='Delete the entity : %i' %( entity['entityId'] ),
 			issue='Are you want to delete this entity? This action is definitive.',
-			cmdYes=functools.partial( self._doAction, entity ),
+			cmdYes=Forge.core.Process.partial( self._doAction, entity ),
 			)
 
 		self.popup.show()

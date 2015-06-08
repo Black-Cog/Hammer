@@ -1,9 +1,8 @@
 
+import Forge.core.Process
 import Anvil.core
 import Hammer.core
 
-# todo : push that into Forge
-import functools
 
 class Project():
 	def __init__( self, parent ):
@@ -42,10 +41,6 @@ class Project():
 	def _buildTreeEntity( self, entityId=1 ):
 		entity = Hammer.getEntity( entityId )
 
-		# todo : replace by a Forge function
-		import os
-		currentPath = os.path.dirname(os.path.realpath(__file__))
-
 		hierarchyList = []
 
 		def setHierarchyList( childrenIds, parentId ):
@@ -60,7 +55,7 @@ class Project():
 				hierarchyList.append( 	{
 										'name':child.getName(),
 										'id':childrenId,
-										'iconPath':'%score/icon/%s%s.png' %( currentPath.replace( '\\', '/' )[:-2], entityType[0].lower(), entityType[1:] ),
+										'iconPath':'../core/icon/%s%s.png' %( entityType[0].lower(), entityType[1:] ),
 										'tooltip':'%s | entityId:%s, name:%s, assetId:%s' %( child.getType(), child.getEntityId(), child.getName(), child.getAssetId() ),
 										'iconTooltip':'type:%s' %( child.getType() ),
 										'parent':parent,
@@ -91,7 +86,7 @@ class Project():
 			parent.clean()
 			if actions:
 				for action in actions:
-					parent.add( Anvil.core.Button(name=action.__name__, cmd=functools.partial(action, entity), w=110) )
+					parent.add( Anvil.core.Button(name=action.__name__, cmd=Forge.core.Process.partial(action, entity), w=110) )
 
 	def menuBar( self, tree ):
 		entityId = tree.getCurrentItemId()
