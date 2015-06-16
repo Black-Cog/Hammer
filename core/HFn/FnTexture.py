@@ -8,12 +8,12 @@ class FnTexture( FnBaseEntity.FnBaseEntity ):
 	def __init__( self ):
 		self.initFn()
 
-		interpreter = Forge.core.System().interpreter()
+		self.__interreter = Forge.core.System().interpreter()
 
-		if interpreter == 'Nuke8.0':
+		if self.__interreter == 'Nuke8.0':
 			self._fn.append( self.publish )
 
-		elif interpreter == 'maya':
+		elif self.__interreter == 'maya':
 			self._fn.append( self.get )
 
 		self._fn.append( self.openSourceScene )
@@ -25,4 +25,11 @@ class FnTexture( FnBaseEntity.FnBaseEntity ):
 		print 'get : %s' %( str(entity) )
 
 	def openSourceScene( self, entity ):
-		self.baseEntityProperty = Hammer.core.Actions.BaseEntityOpenSourceScene( ui=True, entity=entity )
+		args = {}
+		if self.__interreter == 'Nuke8.0':
+			args['newSession'] = {
+									'type' : 'bool',
+									'value' : True,
+								}
+
+		self.baseEntityProperty = Hammer.core.Actions.BaseEntityOpenSourceScene( ui=True, entity=entity, arg=args )

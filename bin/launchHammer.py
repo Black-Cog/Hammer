@@ -37,7 +37,7 @@ interpreter = Forge.core.System().interpreter()
 if interpreter == 'python' :
 	app = QtGui.QApplication(sys.argv)
 	widget = Hammer.ui.ClassLoader()
-	widget.app().showMaximized()
+	widget.app().show()
 	sys.exit( app.exec_() )
 
 # maya
