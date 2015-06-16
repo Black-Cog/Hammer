@@ -17,4 +17,4 @@ class FnTemplate( FnBaseEntity.FnBaseEntity ):
 		print 'get : %s' %( str(entity) )
 
 	def openSourceScene( self, entity ):
-		self.baseEntityProperty = Hammer.core.Actions.BaseEntityOpenSourceScene( ui=True, entity=entity )
+		self.openSourceScene = Hammer.core.Actions.BaseEntityOpenSourceScene( ui=True, entity=entity )

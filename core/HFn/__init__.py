@@ -18,3 +18,5 @@ from FnTexture import FnTexture
 from FnRender import FnRender
 from FnAnimationGeo import FnAnimationGeo
 from FnCamera import FnCamera
+from FnMayaScene import FnMayaScene
+from FnNukeScene import FnNukeScene

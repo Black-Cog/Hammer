@@ -32,4 +32,4 @@ class FnTexture( FnBaseEntity.FnBaseEntity ):
 									'value' : True,
 								}
 
-		self.baseEntityProperty = Hammer.core.Actions.BaseEntityOpenSourceScene( ui=True, entity=entity, arg=args )
+		self.openSourceScene = Hammer.core.Actions.BaseEntityOpenSourceScene( ui=True, entity=entity, arg=args )

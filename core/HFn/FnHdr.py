@@ -19,7 +19,7 @@ class FnHdr( FnBaseEntity.FnBaseEntity ):
 		self._fn.append( self.openSourceScene )
 
 	def publish( self, entity ):
-		self.baseEntityProperty = Hammer.core.Actions.HdrPublish( ui=True, entity=entity )
+		self.publish = Hammer.core.Actions.HdrPublish( ui=True, entity=entity )
 
 	def get( self, entity ):
 		print 'get : %s' %( str(entity) )
@@ -32,4 +32,4 @@ class FnHdr( FnBaseEntity.FnBaseEntity ):
 									'value' : True,
 								}
 
-		self.baseEntityProperty = Hammer.core.Actions.BaseEntityOpenSourceScene( ui=True, entity=entity, arg=args )
+		self.openSourceScene = Hammer.core.Actions.BaseEntityOpenSourceScene( ui=True, entity=entity, arg=args )
