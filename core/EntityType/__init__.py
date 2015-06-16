@@ -16,3 +16,5 @@ from Rig import Rig
 from Shot import Shot
 from Show import Show
 from Template import Template
+from MayaScene import MayaScene
+from NukeScene import NukeScene

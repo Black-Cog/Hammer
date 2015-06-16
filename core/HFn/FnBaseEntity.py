@@ -14,7 +14,7 @@ class FnBaseEntity():
 		self.baseEntityProperty = Hammer.core.Actions.BaseEntityProperty( ui=True, entity=entity )
 
 	def delete( self, entity ):
-		self.baseEntityProperty = Hammer.core.Actions.BaseEntityDelete( ui=True, entity=entity )
+		self.baseEntitydelete = Hammer.core.Actions.BaseEntityDelete( ui=True, entity=entity )
 
 	def rename( self, entity ):
 		print 'rename : %s' %( str(entity) )
