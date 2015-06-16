@@ -6,11 +6,11 @@ class User():
 	def __init__( self, parent ):
 
 		# defind class
-		Alayout       = Anvil.core.Layout
-		Atext         = Anvil.core.Text
-		Abutton       = Anvil.core.Button
+		Alayout     = Anvil.core.Layout
+		Atext       = Anvil.core.Text
+		Abutton     = Anvil.core.Button
 
-		fnUser        = Hammer.core.HFn.FnUser()
+		fnUser      = Hammer.core.HFn.FnUser()
 		userActions = Hammer.core.Actions.UserActions()
 
 		# layout init

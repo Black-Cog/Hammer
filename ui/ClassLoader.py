@@ -41,6 +41,7 @@ class ClassLoader():
 						tabs=[
 							'User',
 							'Project',
+							'Applications',
 							'Farm',
 							'Wiki',
 							'Administration',
@@ -56,5 +57,6 @@ class ClassLoader():
 		# setup Tabs
 		Hammer.ui.User( parent=tab_main.widget(0) )
 		Hammer.ui.Project( parent=tab_main.widget(1) )
+		Hammer.ui.Applications( parent=tab_main.widget(2) )
 
 		self.window.show()
