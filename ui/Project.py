@@ -27,11 +27,15 @@ class Project():
 
 		# buttons init
 		button_up = Abutton( name='UP', cmd=upFolder, w=25, h=25 )
-		button_set = Abutton( name='>', cmd=upFolder, w=25, h=25 )
+		button_set = Abutton( name='>', cmd=self._buildTreeEntity, w=25, h=25 )
+
+		# tree init
+		self.tree_hierarchy = Anvil.core.Tree( w=450, h=400 )
+		self._buildTreeEntity()
 
 		# defind layouts content
 		layout_project.add( [button_up, button_set, self.textfield_urlPath] )
-		layout_project.add( [ self._buildTreeEntity(), box_menuBar ] )
+		layout_project.add( [ self.tree_hierarchy, box_menuBar ] )
 
 		# signals
 		self.tree_hierarchy.signalRightClick.connect( lambda: self.menuBar(self.tree_hierarchy) )
@@ -70,10 +74,10 @@ class Project():
 		setHierarchyList( entity.getChildrenId(), None )
 
 		# tree init
-		self.tree_hierarchy = Anvil.core.Tree( w=450, h=400 )
+		# self.tree_hierarchy = Anvil.core.Tree( w=450, h=400 )
 		self.tree_hierarchy.add( hierarchyList )
 
-		return self.tree_hierarchy
+		# return self.tree_hierarchy
 
 
 	def __addActionsToMenuBar( self, tree, parent ):

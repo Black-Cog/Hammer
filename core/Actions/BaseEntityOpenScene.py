@@ -16,10 +16,16 @@ class BaseEntityOpenScene( BaseAction.BaseAction ):
 		self.popup.show()
 
 	def _doAction( self, entity, arg ):
-		path = entity['path']
+
+		extension = 'unknow'
+		if entity['entityType'] == 'MayaScene':
+			extension = 'ma'
+		elif entity['entityType'] == 'NukeScene':
+			extension = 'nk'
+
+		path = '%s/%s/scene.%s' %( entity['path'], str(entity['version']*10).zfill(4), extension )
 
 		if path and Forge.core.System.exists( path ):
-			extension = Forge.core.System.getExtension( path )
 
 			newSession = True
 			if 'newSession' in arg:
@@ -41,7 +47,7 @@ class BaseEntityOpenScene( BaseAction.BaseAction ):
 
 			else :
 				import Hammer.ui
-				self.popup = Hammer.ui.WindowInfo( title='Warning', info='The extension "%s" is unknow.' %(extension) )
+				self.popup = Hammer.ui.WindowInfo( title='Warning', info='The entity "%s" is not supported yet.' %(entity['entityType']) )
 				self.popup.show()
 
 		else:

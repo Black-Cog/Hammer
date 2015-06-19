@@ -16,7 +16,7 @@ class BaseEntityOpenSourceScene( BaseAction.BaseAction ):
 		self.popup.show()
 
 	def _doAction( self, entity, arg ):
-		path = entity['source']
+		path = entity['source'][entity['version']]
 
 		if path and Forge.core.System.exists( path ):
 			extension = Forge.core.System.getExtension( path )
