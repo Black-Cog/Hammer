@@ -6,3 +6,4 @@ from BaseEntityDelete import BaseEntityDelete
 from HdrPublish import HdrPublish
 from BaseEntityOpenSourceScene import BaseEntityOpenSourceScene
 from BaseEntityOpenScene import BaseEntityOpenScene
+from CreateEntity import CreateEntity

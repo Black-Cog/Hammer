@@ -8,22 +8,28 @@ class BaseEntity():
 				entityId=None,
 				name=None,
 				path=None,
-				version=None,
+				version=0,
+				descriptions={},
+				approved={},
+				currentUser=None,
 				parentId=None,
-				childrenId=None,
+				childrenId=[],
 				copyId=None,
 				referenceId=None,
 				assetId=None,
 				masterAssetId=None,
 				dependencyId=None,
 				bundleId=None,
-				sources=None,
+				sources={},
 				):
 
 		self.__entityId = entityId
 		self.__name = name
 		self.__path = path
 		self.__version = version
+		self.__descriptions = descriptions
+		self.__approved = approved
+		self.__currentUser = currentUser
 		self.__parentId = parentId
 		self.__childrenId = childrenId
 		self.__copyId = copyId
@@ -49,6 +55,15 @@ class BaseEntity():
 
 		elif key == 'version':
 			return self.getVersion()
+
+		elif key == 'descriptions':
+			return self.getDescriptions()
+
+		elif key == 'approved':
+			return self.getApproved()
+
+		elif key == 'currentUser':
+			return self.getCurrentUser()
 
 		elif key == 'parentId':
 			return self.getParentId()
@@ -108,6 +123,30 @@ class BaseEntity():
 		'''
 		return self.__version
 
+	def getDescriptions( self, version=None ):
+		'''
+		Return descriptions of the current entity.
+		'''
+		if version:
+			return self.__descriptions[version]
+		else:
+			return self.__descriptions
+
+	def getApproved( self, version=None ):
+		'''
+		Return approved of the current entity.
+		'''
+		if version:
+			return self.__approved[version]
+		else:
+			return self.__approved
+
+	def getCurrentUser( self ):
+		'''
+		Return the current user of this entity.
+		'''
+		return self.__currentUser
+
 	def getParentId( self ):
 		'''
 		Return the id of direct parent of this entity.
@@ -158,9 +197,11 @@ class BaseEntity():
 		'''
 		return self.__bundleId
 
-	def getSource( self ):
+	def getSource( self, version=None ):
 		'''
 		Return the sources of the current entity.
 		'''
-		return self.__sources
-
+		if version:
+			return self.__sources[version]
+		else:
+			return self.__sources

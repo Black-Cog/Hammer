@@ -1,5 +1,6 @@
 
 import FnBaseEntity
+import Hammer
 
 class FnShow( FnBaseEntity.FnBaseEntity ):
 	def __init__( self ):
@@ -7,4 +8,5 @@ class FnShow( FnBaseEntity.FnBaseEntity ):
 		self._fn.append( self.createEntity )
 
 	def createEntity( self, entity ):
-		print 'createEntity : %s' %( str(entity) )
+
+		self.openSourceScene = Hammer.core.Actions.CreateEntity( ui=True, entity=entity )

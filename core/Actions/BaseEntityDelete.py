@@ -15,4 +15,19 @@ class BaseEntityDelete( BaseAction.BaseAction ):
 		self.popup.show()
 
 	def _doAction( self, entity, arg ):
-		print 'actionDelete'
+		import Hammer
+
+		entityId = entity.getEntityId()
+		childrenList = [ entityId ]
+
+		def listAllChildren( parentId ):
+			childrens = Hammer.getEntity( parentId ).getChildrenId()
+			if childrens:
+				for children in childrens:
+					childrenList.append( children )
+					listAllChildren( children )
+
+		listAllChildren( entityId )
+
+		for children in childrenList:
+			Hammer.Database().removeEntity( children )

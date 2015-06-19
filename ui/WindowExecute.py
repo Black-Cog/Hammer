@@ -60,7 +60,7 @@ class WindowExecute( WindowPopup.WindowPopup ):
 				field = Anvil.core.Colorpicker( color=value['value'], name=key )
 
 			elif value['type'] == 'enum':
-				field = Anvil.core.Dropmenu( items=value['value'], name=key )
+				field = Anvil.core.Dropmenu( items=value['value'], name=key, w=150 )
 
 			self.layout_main.add([
 					Anvil.core.Text( text='%s :' %(key), w=100 ),
