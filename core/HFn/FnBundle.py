@@ -2,7 +2,7 @@
 import FnBaseEntity
 
 class FnBundle( FnBaseEntity.FnBaseEntity ):
-	def __init__( self ):
+	def __init__( self, entity ):
 		self.initFn()
 		self._fn.append( self.publish )
 		self._fn.append( self.get )

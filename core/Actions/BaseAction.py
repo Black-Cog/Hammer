@@ -3,6 +3,8 @@
 class BaseAction():
 	def __init__( self, ui=False, entity=None, arg=None ):
 
+		self.returnValue = None
+
 		if ui:
 			self._doUi( entity=entity, arg=arg )
 		else:

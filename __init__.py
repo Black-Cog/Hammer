@@ -1,5 +1,6 @@
 
 
+import Forge
 ###############
 # import master modules
 ###############
@@ -7,6 +8,8 @@
 import ui
 import core
 
+import Hmaya
+import Hnuke
 
 ###############
 # Binding at root level of Hammer

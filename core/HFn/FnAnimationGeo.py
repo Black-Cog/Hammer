@@ -5,7 +5,7 @@ import Hammer.core
 import FnBaseEntity
 
 class FnAnimationGeo( FnBaseEntity.FnBaseEntity ):
-	def __init__( self ):
+	def __init__( self, entity ):
 		self.initFn()
 
 		self.__interpreter = Forge.core.System().interpreter()

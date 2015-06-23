@@ -55,8 +55,12 @@ coreEntityTypeDir   = 'core/EntityType'
 coreHFnDir          = 'core/HFn'
 coreActionsDir      = 'core/Actions'
 coreIconDir         = 'core/icon'
-corePythonHammerDir = 'core/python/Hammer'
-coreMayaActionsDir  = 'maya/actions'
+# corePythonHammerDir = 'core/python/Hammer'
+HmayaDir            = 'Hmaya'
+HmayaActionsDir     = 'Hmaya/Actions'
+HnukeDir            = 'Hnuke'
+HnukeActionsDir     = 'Hnuke/Actions'
+# coreMayaActionsDir  = 'maya/actions'
 uiDir               = 'ui'
 
 Fsystem = Forge.core.System()
@@ -69,8 +73,12 @@ for folder in 	[
 					coreHFnDir,
 					coreActionsDir,
 					coreIconDir,
-					corePythonHammerDir,
-					coreMayaActionsDir,
+					# corePythonHammerDir,
+					HmayaDir,
+					HmayaActionsDir,
+					HnukeDir,
+					HnukeActionsDir,
+					# coreMayaActionsDir,
 				]:
 	Fsystem.mkdir( '%s%s' %(softwarePath, folder) )
 
@@ -90,9 +98,14 @@ for folder in 	[
 					coreHFnDir,
 					coreActionsDir,
 					coreIconDir,
-					corePythonHammerDir,
-					coreMayaActionsDir,
+					# corePythonHammerDir,
+					HmayaDir,
+					HmayaActionsDir,
+					HnukeDir,
+					HnukeActionsDir,
+					# coreMayaActionsDir,
 				]:
+
 	for file in os.listdir( folder ):
 		currentFile = '%s/%s' %( folder, file )
 		newFile = '%s%s/%s' %( softwarePath, folder, file )

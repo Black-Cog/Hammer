@@ -1,7 +1,7 @@
 import sys
 import Forge.core
 
-class FnProject(object):
+class FnProject():
 	"""docstring for FnProject"""
 	
 	@staticmethod

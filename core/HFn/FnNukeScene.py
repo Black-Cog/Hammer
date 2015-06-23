@@ -5,7 +5,7 @@ import Hammer.core
 import FnBaseEntity
 
 class FnNukeScene( FnBaseEntity.FnBaseEntity ):
-	def __init__( self ):
+	def __init__( self, entity ):
 		self.initFn()
 
 		self.__interreter = Forge.core.System().interpreter()
@@ -13,7 +13,9 @@ class FnNukeScene( FnBaseEntity.FnBaseEntity ):
 		self._fn.append( self.openScene )
 
 		if self.__interreter == 'Nuke8.0':
-			self._fn.append( self.saveInc )
+			entitiesLoad = Hammer.Hnuke.Actions.getEntitiesFromScene( arg={'entityId':entity['entityId']} ).returnValue
+			if entitiesLoad and entitiesLoad[0]['entityId'] == entity['entityId']:
+				self._fn.append( self.saveInc )
 
 	def openScene( self, entity ):
 		args = {}
