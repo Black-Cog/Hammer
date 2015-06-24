@@ -13,7 +13,6 @@ class WindowProperty( WindowPopup.WindowPopup ):
 
 		# defind class
 		Atext = Anvil.core.Text
-		# Abutton = Anvil.core.Button
 
 		# tabs init
 		tab_main = Anvil.core.Tab(
