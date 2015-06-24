@@ -38,7 +38,6 @@ coalPatchVersion     = 1 # bug fixes
 ###############################################################################################
 
 
-softwareEnvironment = 'f:/software/'
 softwareName = 'hammer_%s.%s.%s.%sdev/%s' %( coalMilestoneVersion, coalMajorVersion, coalMinorVersion, coalPatchVersion, 'Hammer' )
 softwarePath = '%s%s/' %( softwareEnvironment, softwareName )
 

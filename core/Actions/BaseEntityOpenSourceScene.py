@@ -1,5 +1,5 @@
 
-import Forge.core.Process
+import Forge.core
 import BaseAction
 
 class BaseEntityOpenSourceScene( BaseAction.BaseAction ):
@@ -16,7 +16,10 @@ class BaseEntityOpenSourceScene( BaseAction.BaseAction ):
 		self.popup.show()
 
 	def _doAction( self, entity, arg ):
-		path = entity['source'][entity['version']]
+
+		path = ''
+		if entity['version'] > 0 :
+			path = entity['source'][entity['version']]
 
 		if path and Forge.core.System.exists( path ):
 			extension = Forge.core.System.getExtension( path )
@@ -27,14 +30,14 @@ class BaseEntityOpenSourceScene( BaseAction.BaseAction ):
 
 			if extension == 'nk':
 				if newSession:
-					Forge.core.Process.launchSoftware( 'c:/Program Files/Nuke8.0v3/Nuke8.0.exe', arg=path )
+					Forge.core.Process.launchSoftware( Forge.core.Env().nuke, arg=path )
 				else:
 					import nuke
 					nuke.scriptOpen( path )
 
 			elif extension == 'ma':
 				if newSession:
-					Forge.core.Process.launchSoftware( 'c:/Program Files/Autodesk/Maya2015/bin/maya.exe', arg=path )
+					Forge.core.Process.launchSoftware( Forge.core.Env().maya, arg=path )
 				else:
 					import maya.cmds
 					maya.cmds.file( path, f=True, o=True )
