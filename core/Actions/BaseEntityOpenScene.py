@@ -1,5 +1,5 @@
 
-import Forge.core.Process
+import Forge.core
 import BaseAction
 
 class BaseEntityOpenScene( BaseAction.BaseAction ):
@@ -35,7 +35,7 @@ class BaseEntityOpenScene( BaseAction.BaseAction ):
 			if extension == 'nk':
 				if entity['version'] > 0:
 					if newSession:
-						Forge.core.Process.launchSoftware( 'c:/Program Files/Nuke8.0v3/Nuke8.0.exe', arg=path )
+						Forge.core.Process.launchSoftware( Forge.core.Env().nuke, arg=path )
 					else:
 						import nuke
 						nuke.scriptOpen( path )
@@ -53,7 +53,7 @@ class BaseEntityOpenScene( BaseAction.BaseAction ):
 			elif extension == 'ma':
 				if entity['version'] > 0:
 					if newSession:
-						Forge.core.Process.launchSoftware( 'c:/Program Files/Autodesk/Maya2015/bin/maya.exe', arg=path )
+						Forge.core.Process.launchSoftware( Forge.core.Env().maya, arg=path )
 					else:
 						import maya.cmds
 						maya.cmds.file( path, f=True, o=True )
