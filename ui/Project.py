@@ -8,9 +8,9 @@ class Project():
 	def __init__( self, parent ):
 
 		# defind class
-		Alayout       = Anvil.core.Layout
-		Abutton       = Anvil.core.Button
-		Atextfield    = Anvil.core.Textfield
+		Alayout    = Anvil.core.Layout
+		Abutton    = Anvil.core.Button
+		Atextfield = Anvil.core.Textfield
 
 		# boxs init
 		box_menuBar = Anvil.core.Box( name='Actions', w=150, h=400 )
@@ -26,8 +26,8 @@ class Project():
 		upFolder = lambda: Hammer.core.HFn.FnProject().upFolder( self )
 
 		# buttons init
-		button_up = Abutton( name='UP', cmd=upFolder, w=25, h=25 )
-		button_set = Abutton( name='>', cmd=self._buildTreeEntity, w=25, h=25 )
+		button_up = Abutton( name='', cmd=upFolder, w=25, h=25, icon='../core/icon/up.png', iconSize=[25, 25] )
+		button_set = Abutton( name='', cmd=self._buildTreeEntity, w=25, h=25, icon='../core/icon/refresh.png', iconSize=[25, 25] )
 
 		# tree init
 		self.tree_hierarchy = Anvil.core.Tree( w=450, h=400 )
