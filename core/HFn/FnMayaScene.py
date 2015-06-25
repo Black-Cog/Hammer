@@ -13,10 +13,9 @@ class FnMayaScene( FnBaseEntity.FnBaseEntity ):
 		self._fn.append( self.openScene )
 
 		if self.__interreter == 'maya':
-			entitiesLoad = Hammer.Hmaya.Actions.getEntitiesFromScene( arg={'entityId':entity['entityId']} ).returnValue
+			entitiesLoad = Hammer.Hmaya.Actions.GetEntitiesFromScene( arg={'entityId':entity['entityId']} ).returnValue
 			if entitiesLoad and entitiesLoad[0]['entityId'] == entity['entityId']:
 				self._fn.append( self.saveInc )
-
 
 	def openScene( self, entity ):
 		args = {}
@@ -29,4 +28,5 @@ class FnMayaScene( FnBaseEntity.FnBaseEntity ):
 		self.openScene = Hammer.core.Actions.BaseEntityOpenScene( ui=True, entity=entity, arg=args )
 
 	def saveInc( self, entity ):
-		print 'saveInc : %s' %( str(entity) )
+
+		self.saveInc = Hammer.Hmaya.Actions.MayaSceneSaveInc( ui=True, entity=entity )

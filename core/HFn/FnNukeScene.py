@@ -13,7 +13,7 @@ class FnNukeScene( FnBaseEntity.FnBaseEntity ):
 		self._fn.append( self.openScene )
 
 		if self.__interreter == 'Nuke8.0':
-			entitiesLoad = Hammer.Hnuke.Actions.getEntitiesFromScene( arg={'entityId':entity['entityId']} ).returnValue
+			entitiesLoad = Hammer.Hnuke.Actions.GetEntitiesFromScene( arg={'entityId':entity['entityId']} ).returnValue
 			if entitiesLoad and entitiesLoad[0]['entityId'] == entity['entityId']:
 				self._fn.append( self.saveInc )
 
@@ -28,4 +28,5 @@ class FnNukeScene( FnBaseEntity.FnBaseEntity ):
 		self.openScene = Hammer.core.Actions.BaseEntityOpenScene( ui=True, entity=entity, arg=args )
 
 	def saveInc( self, entity ):
-		print 'saveInc : %s' %( str(entity) )
+
+		self.saveInc = Hammer.Hnuke.Actions.NukeSceneSaveInc( ui=True, entity=entity )

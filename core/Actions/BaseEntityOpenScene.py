@@ -71,10 +71,10 @@ class BaseEntityOpenScene( BaseAction.BaseAction ):
 
 			else :
 				import Hammer.ui
-				self.popup = Hammer.ui.WindowInfo( title='Warning', info='The entity "%s" is not supported yet.' %(entity['entityType']) )
+				self.popup = Hammer.ui.WindowWarning( info='The entity "%s" is not supported yet.' %(entity['entityType']) )
 				self.popup.show()
 
 		else :
 			import Hammer.ui
-			self.popup = Hammer.ui.WindowInfo( title='Warning', info='No file found at this location : %s.' %(path) )
+			self.popup = Hammer.ui.WindowWarning( info='No file found at this location : %s.' %(path) )
  			self.popup.show()

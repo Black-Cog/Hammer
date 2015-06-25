@@ -44,10 +44,10 @@ class BaseEntityOpenSourceScene( BaseAction.BaseAction ):
 
 			else :
 				import Hammer.ui
-				self.popup = Hammer.ui.WindowInfo( title='Warning', info='The extension "%s" is unknow.' %(extension) )
+				self.popup = Hammer.ui.WindowWarning( info='The extension "%s" is unknow.' %(extension) )
 				self.popup.show()
 
 		else:
 			import Hammer.ui
-			self.popup = Hammer.ui.WindowInfo( title='Warning', info='No file found at this location : %s.' %(path) )
+			self.popup = Hammer.ui.WindowWarning( info='No file found at this location : %s.' %(path) )
 			self.popup.show()
