@@ -1,31 +1,43 @@
 
+import Forge.core.Process
 import Anvil.core
+import Hammer
 
 import WindowPopup
 
 class WindowProperty( WindowPopup.WindowPopup ):
-	def __init__( self, title=None, iconPath=None, size=[ 900, 530 ], entity=None ):
+	def __init__( self, title=None, iconPath=None, size=[ 700, 530 ], entity=None ):
 
 		if not title:
 			title = 'Property of entity : %i' %( entity['entityId'] )
 
 		self.init( title=title, iconPath=iconPath, size=size )
 
-		# defind class
-		Atext = Anvil.core.Text
+		version = False
+		if len( entity['approved'] ) > 0:
+			version = True
+
+		tabList = [ 'Globals' ]
+		if version:
+			tabList.append( 'Versions' )
 
 		# tabs init
 		tab_main = Anvil.core.Tab(
 						parent=self.window,
-						tabs=[
-							'Globals',
-							'Versions',
-							],
+						tabs=tabList,
 						)
 
 		# layout init
-		layout_globals = Anvil.core.Layout( parent=tab_main.widget(0), w=size[0], h=size[1] )
-		layout_versions = Anvil.core.Layout( parent=tab_main.widget(1), w=size[0], h=size[1] )
+		_Globals( parent=tab_main.widget(0), entity=entity, size=size )
+		if version:
+			_Version( parent=tab_main.widget(1), entity=entity, size=size )
+
+
+class _Globals():
+	def __init__( self, parent, entity, size ):
+
+		# defind class
+		Atext = Anvil.core.Text
 
 		# globals init
 		propertyList = [
@@ -43,30 +55,98 @@ class WindowProperty( WindowPopup.WindowPopup ):
 						'masterAssetId',
 						'dependencyId',
 						'bundleId',
-					   ]
+						]
+
+		layout_globals = Anvil.core.Layout( parent=parent )
+
 		for item in propertyList:
 			layout_globals.add( [
 								Atext( text=item , w=size[0]*0.25 ),
 								Atext( text=str(entity[item]) , w=size[0]*0.75 ),
 							 ] )
 
+class _Version():
+	def __init__( self, parent, entity, size ):
+
+		# defind class
+		Alayout = Anvil.core.Layout
+
+		# boxs init
+		box_menuBar = Anvil.core.Box( name='Actions', w=size[0]*0.25-20, h=size[1]-20 )
+
+		# layout init
+		layout_sceneContent = Alayout( parent=parent, w=size[0], h=size[1] )
+		layout_menuBar = Alayout( parent=box_menuBar )
+
+		# tree init
+		self.tree_hierarchy = Anvil.core.Tree( w=size[0]*0.75-20, h=size[1]-20 )
+		self._buildTreeEntity( entity=entity )
+
+		# defind layouts content
+		layout_sceneContent.add( [ self.tree_hierarchy, box_menuBar ] )
+
+		# signals
+		self.tree_hierarchy.signalRightClick.connect( lambda: self.menuBar(self.tree_hierarchy) )
+		self.tree_hierarchy.signalLeftClick.connect( lambda: self.__addActionsToMenuBar(self.tree_hierarchy, layout_menuBar) )
+
+
+	def _buildTreeEntity( self, entity ):
+
+		hierarchyList = []
 
 		# versions init
 		for version in range( len(entity['approved']) ):
 			version = version + 1
 
-			actif = 'unactif'
+			if entity['approved'][version]:
+				iconType = 'approved'
+			else:
+				iconType = 'unapproved'
+
 			if version == entity['version']:
-				actif = 'actif'
+				iconType += 'Actif'
 
 			source = ''
 			if entity['source']:
 				source = entity['source'][version]
 
-			layout_versions.add( [
-								Atext( text='version %i : ' %(version) , w=size[0]*0.1 ),
-								Atext( text=actif, w=size[0]*0.05 ),
-								Atext( text=entity['descriptions'][version] , w=size[0]*0.2 ),
-								Atext( text='approved : %s ' %(entity['approved'][version]) , w=size[0]*0.15 ),
-								Atext( text='source : %s ' %(source) , w=size[0]*0.5 ),
-								] )
+
+			hierarchyList.append( 	{
+									'name':' %i : %s' %( version, entity['descriptions'][version] ),
+									'id':entity['entityId'],
+									'iconPath':'../core/icon/%s.png' %( iconType ),
+									'tooltip':'source : %s ' %(source),
+									'iconTooltip':'',
+									'parent':None,
+									'parentId':None,
+									} )
+
+
+		# tree init
+		self.tree_hierarchy.add( hierarchyList )
+
+	def __addActionsToMenuBar( self, tree, parent ):
+
+		entityId = tree.getCurrentItemId()
+		itemName = tree.getCurrentItemName()
+		version = eval( itemName.split( ':' )[0] )
+
+		if entityId:
+			entity = Hammer.getEntity( entityId )
+			entity.setVersion( version=version )
+			actions = Hammer.getActions( entity, 'Version' )
+			actions += Hammer.getActions( entity )
+
+			parent.clean()
+			if actions:
+				for action in actions:
+					if action.__name__ in [ 'approved', 'setCurrent', 'openScene', 'openSourceScene', 'get' ]:
+						parent.add( Anvil.core.Button(name=action.__name__, cmd=Forge.core.Process.partial(action, entity), w=110) )
+
+	def menuBar( self, tree ):
+		entityId = tree.getCurrentItemId()
+		if entityId:
+			entity = Hammer.getEntity( entityId )
+			print entity.getName()
+
+
