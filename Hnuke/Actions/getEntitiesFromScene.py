@@ -1,7 +1,7 @@
 
 import Hammer.core.Actions.BaseAction
 
-class getEntitiesFromScene( Hammer.core.Actions.BaseAction ):
+class GetEntitiesFromScene( Hammer.core.Actions.BaseAction ):
 
 	def _doAction( self, entity, arg ):
 
@@ -9,26 +9,9 @@ class getEntitiesFromScene( Hammer.core.Actions.BaseAction ):
 		import Hammer
 
 		self.returnValue = []
-
-		entitiesInfo = []
-		for node in nuke.allNodes():
-			if node.Class() == 'StickyNote' and node['name'].value() == 'entityInfo':
-				entitiesInfo.append( node )
-
-		entityId = None
-		if 'entityId' in arg.keys():
-			entityId = arg['entityId']
-
-		entityType = None
-		if 'entityType' in arg.keys():
-			entityType = arg['entityType']
-
+		entitiesInfo = Hammer.Hnuke.Actions.GetEntitiesInfoFromScene( entity=entity, arg=arg ).returnValue
 
 		for entityInfo in entitiesInfo:
 			currentEntityId = entityInfo.knob('entityId').value()
 
-			if entityId and entityId == currentEntityId:
-				self.returnValue.append( Hammer.getEntity(currentEntityId) )
-
-			if entityType and entityType == entityInfo.knob('entityType').value():
-				self.returnValue.append( Hammer.getEntity(currentEntityId) )
+			self.returnValue.append( Hammer.getEntity(currentEntityId) )

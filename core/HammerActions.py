@@ -209,3 +209,82 @@ class Database():
 
 			with open( self.db, 'w' ) as file:
 				file.writelines( data )
+
+	def addNewVersion( self, entity, description, approved, source=None ):
+
+		newVersion = len( entity['approved'] ) + 1
+
+		newDescription = entity['descriptions']
+		newDescription[newVersion] = description
+
+		newApproved = entity['approved']
+		newApproved[newVersion] = approved
+
+		newSources = entity['sources']
+		if source :
+			newSources[newVersion] = source
+
+		# define data
+		with open( self.db, 'r' ) as file:
+			data = file.readlines()
+
+		# grab entity
+		entityLine = self.__getDbLine( entity['entityId'] )
+
+		data[entityLine] = str({
+					'entityId':entity['entityId'],
+					'name':entity['name'],
+					'type':entity['entityType'],
+					'path':entity['path'],
+					'version':entity['version'],
+					'descriptions':newDescription,
+					'approved':newApproved,
+					'currentUser':entity['currentUser'],
+					'parentId':entity['parentId'],
+					'childrenId':entity['childrenId'],
+					'copyId':entity['copyId'],
+					'referenceId':entity['referenceId'],
+					'assetId':entity['assetId'],
+					'masterAssetId':entity['masterAssetId'],
+					'dependencyId':entity['dependencyId'],
+					'bundleId':entity['bundleId'],
+					'sources':newSources,
+					}) + '\n'
+
+		with open( self.db, 'w' ) as file:
+			file.writelines( data )
+
+	def editEntity( self, entity, version=None ):
+		newVersion = entity['version']
+		if version:
+			newVersion = version
+
+		# define data
+		with open( self.db, 'r' ) as file:
+			data = file.readlines()
+
+		# grab entity
+		entityLine = self.__getDbLine( entity['entityId'] )
+
+		data[entityLine] = str({
+					'entityId':entity['entityId'],
+					'name':entity['name'],
+					'type':entity['entityType'],
+					'path':entity['path'],
+					'version':newVersion,
+					'descriptions':entity['descriptions'],
+					'approved':entity['approved'],
+					'currentUser':entity['currentUser'],
+					'parentId':entity['parentId'],
+					'childrenId':entity['childrenId'],
+					'copyId':entity['copyId'],
+					'referenceId':entity['referenceId'],
+					'assetId':entity['assetId'],
+					'masterAssetId':entity['masterAssetId'],
+					'dependencyId':entity['dependencyId'],
+					'bundleId':entity['bundleId'],
+					'sources':entity['sources'],
+					}) + '\n'
+
+		with open( self.db, 'w' ) as file:
+			file.writelines( data )

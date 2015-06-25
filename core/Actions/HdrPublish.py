@@ -1,19 +1,10 @@
 
 import Forge.core.Process
 
-import BaseAction
+import BasePublishAction
 
-class HdrPublish( BaseAction.BaseAction ):
+class HdrPublish( BasePublishAction.BasePublishAction ):
 
-	def _doUi( self, entity, arg ):
-		import Hammer.ui
-		self.popup = Hammer.ui.WindowPublish(
-			entity=entity,
-			cmd=Forge.core.Process.partial( self._doAction, entity ),
-		 )
-
-		self.popup.show()
-
-	def _doAction( self, entity, arg ):
+	def _doPublish( self, entity, arg ):
 		print 'Hdr Publish'
 
