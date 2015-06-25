@@ -1,15 +1,18 @@
 
-def getActions( entity ):
+def getActions( entity, entityType=None ):
 	'''
 	Return the list of action for the entity.
 	'''
 
 	import HFn
 
-	entityType = entity.getType()
+	if entityType:
+		currentEntityType = entityType
+	else:
+		currentEntityType = entity.getType()
 
 	for fnMethod in dir( HFn ):
-		if fnMethod == 'Fn%s' %( entityType ):
+		if fnMethod == 'Fn%s' %( currentEntityType ):
 			classFn = eval( 'HFn.%s' %(fnMethod) )
 			return classFn( entity=entity )._fn
 
@@ -254,10 +257,14 @@ class Database():
 		with open( self.db, 'w' ) as file:
 			file.writelines( data )
 
-	def editEntity( self, entity, version=None ):
+	def editEntity( self, entity, version=None, approved=None ):
 		newVersion = entity['version']
 		if version:
 			newVersion = version
+
+		newApproved = entity['approved']
+		if approved:
+			newApproved = approved
 
 		# define data
 		with open( self.db, 'r' ) as file:

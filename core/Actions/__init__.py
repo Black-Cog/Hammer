@@ -8,3 +8,5 @@ from BaseEntityOpenSourceScene import BaseEntityOpenSourceScene
 from BaseEntityOpenScene import BaseEntityOpenScene
 from CreateEntity import CreateEntity
 from BasePublishAction import BasePublishAction
+from VersionApproved import VersionApproved
+from VersionSetCurrent import VersionSetCurrent

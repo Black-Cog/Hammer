@@ -205,3 +205,9 @@ class BaseEntity():
 			return self.__sources[version]
 		else:
 			return self.__sources
+
+	def setVersion( self, version ):
+		'''
+		Set the version of the current entity.
+		'''
+		self.__version = version
