@@ -13,3 +13,4 @@ from WindowPublish import WindowPublish
 from WindowInfo import WindowInfo
 from WindowCreateEntity import WindowCreateEntity
 from WindowWarning import WindowWarning
+from SceneContent import SceneContent

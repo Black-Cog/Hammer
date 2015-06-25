@@ -24,7 +24,7 @@ class CreateEntity( BaseAction.BaseAction ):
 			parent = Hammer.getEntity( entity['parentId'] )
 			self.path.append( parent['name'] + '/' )
 
-			if parent['entityType'] == 'Show':
+			if parent['entityType'] in ['Show', 'BaseEntity']:
 				return
 			listParentName( parent )
 		listParentName( entity )

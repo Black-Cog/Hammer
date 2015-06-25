@@ -16,19 +16,23 @@ class GetEntitiesInfoFromScene( Hammer.core.Actions.BaseAction ):
 				entitiesInfo.append( node )
 
 		entityId = None
-		if 'entityId' in arg.keys():
+		if arg and 'entityId' in arg.keys():
 			entityId = arg['entityId']
 
 		entityType = None
-		if 'entityType' in arg.keys():
+		if arg and 'entityType' in arg.keys():
 			entityType = arg['entityType']
 
 
 		for entityInfo in entitiesInfo:
-			currentEntityId = entityInfo.knob('entityId').value()
+			if arg:
+				currentEntityId = entityInfo.knob('entityId').value()
 
-			if entityId and entityId == currentEntityId:
-				self.returnValue.append( entityInfo )
+				if entityId and entityId == currentEntityId:
+					self.returnValue.append( entityInfo )
 
-			if entityType and entityType == entityInfo.knob('entityType').value():
+				if entityType and entityType == entityInfo.knob('entityType').value():
+					self.returnValue.append( entityInfo )
+
+			else:
 				self.returnValue.append( entityInfo )
