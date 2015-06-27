@@ -1,7 +1,7 @@
 
 import Forge.core.Process
 import Anvil.core
-import Hammer.core
+import Hammer
 
 
 class Project():
@@ -22,12 +22,23 @@ class Project():
 		# textfields init
 		self.textfield_urlPath = Atextfield( text='/', w=380 )
 
-		# actions init
-		upFolder = lambda: Hammer.core.HFn.FnProject().upFolder( self )
-
 		# buttons init
-		button_up = Abutton( name='', cmd=upFolder, w=25, h=25, icon='../core/icon/up.png', iconSize=[25, 25] )
-		button_set = Abutton( name='', cmd=self._buildTreeEntity, w=25, h=25, icon='../core/icon/refresh.png', iconSize=[25, 25] )
+		button_up = Abutton(
+							name='',
+							cmd=Forge.core.Process.partial( Hammer.core.HFn.FnProject().upFolder, self ),
+							w=25,
+							h=25,
+							icon='../core/icon/up.png',
+							iconSize=[25, 25],
+							)
+		button_set = Abutton(
+							name='',
+							cmd=self._buildTreeEntity,
+							w=25,
+							h=25,
+							icon='../core/icon/refresh.png',
+							iconSize=[25, 25],
+							)
 
 		# tree init
 		self.tree_hierarchy = Anvil.core.Tree( w=450, h=400 )
@@ -38,12 +49,16 @@ class Project():
 		layout_project.add( [ self.tree_hierarchy, box_menuBar ] )
 
 		# signals
-		self.tree_hierarchy.signalRightClick.connect( lambda: self.menuBar(self.tree_hierarchy) )
-		self.tree_hierarchy.signalLeftClick.connect( lambda: self.__addActionsToMenuBar(self.tree_hierarchy, layout_menuBar) )
+		self.tree_hierarchy.signalRightClick.connect( Forge.core.Process.partial(self.menuBar, self.tree_hierarchy) )
+		self.tree_hierarchy.signalLeftClick.connect( Forge.core.Process.partial(self.__addActionsToMenuBar, self.tree_hierarchy, layout_menuBar) )
 
 
-	def _buildTreeEntity( self, entityId=1 ):
-		entity = Hammer.getEntity( entityId )
+	def _buildTreeEntity( self, entityIdOverride=False ):
+
+		if not entityIdOverride:
+			self._currentEntityId = self.__getEntityIdFromPath()
+
+		entity = Hammer.getEntity( self._currentEntityId )
 
 		hierarchyList = []
 
@@ -74,13 +89,45 @@ class Project():
 		setHierarchyList( entity.getChildrenId(), None )
 
 		# tree init
-		# self.tree_hierarchy = Anvil.core.Tree( w=450, h=400 )
 		self.tree_hierarchy.add( hierarchyList )
 
-		# return self.tree_hierarchy
+	def __getEntityIdFromPath( self ):
 
+		path = self.textfield_urlPath.getValue()
+
+		folders = []
+		for folder in path.split( '/' ):
+			if folder:
+				folders.append( folder )
+
+		def checkMatch( entityId, name ):
+			childrenIds = Hammer.getEntity( entityId ).getChildrenId()
+			for childrenId in childrenIds:
+				if Hammer.getEntity( childrenId ).getName() == name:
+					return childrenId
+			return None
+
+		entityId = 1
+		newPath = '/'
+		for folder in folders:
+			if entityId:
+				newEntityId = entityId
+				entityId = checkMatch( entityId, folder )
+
+				if entityId:
+					newPath += '%s/' %( folder )
+				else:
+					entityId = newEntityId
+					break
+
+		self.textfield_urlPath.setValue( newPath )
+
+		return entityId
 
 	def __addActionsToMenuBar( self, tree, parent ):
+		'''
+		Build actions menu
+		'''
 
 		entityId = tree.getCurrentItemId()
 		if entityId:
