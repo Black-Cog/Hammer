@@ -15,7 +15,7 @@ class MayaSceneSaveInc( Hammer.core.Actions.BasePublishAction ):
 		newVersion = len( entity['approved'] )
 
 		# set current version
-		Hammer.Database().editEntity( entity, version=newVersion )
+		Hammer.Database().editEntity( entity['entityId'], version=newVersion )
 
 		folder = '%s/%s/' %( entity['path'], str(newVersion*10).zfill(4) )
 		path = '%s/scene.ma' %( folder )
