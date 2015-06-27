@@ -33,7 +33,6 @@ class CreateEntity( BaseAction.BaseAction ):
 		self.path.reverse()
 		path = ''.join( self.path )
 
-		print path
 		if Forge.core.System().exists( path ):
 			import Hammer.ui
 			self.ask = Hammer.ui.WindowAsk(
