@@ -1,11 +1,12 @@
 
+import Forge.core.Process
 import Anvil.core
 import Hammer
 
 import WindowExecute
 
 class WindowCreateEntity( WindowExecute.WindowExecute ):
-	def __init__( self, title='Create Entity', iconPath=None, size=[ 400, 100 ], entity=None, cmd=None, arg={} ):
+	def __init__( self, title='Create Entity', iconPath=None, size=[ 400, 100 ], entity=None, cmd=None, arg={}, ui=None ):
 
 		self.init( title=title, iconPath=iconPath, size=size )
 
@@ -40,7 +41,7 @@ class WindowCreateEntity( WindowExecute.WindowExecute ):
 		self._buildCustom( arg=args )
 
 		# buttons init
-		button_launch = Abutton( name='Create Entity', cmd=self.execute, w=size[0]/2 - 15, h=25 )
+		button_launch = Abutton( name='Create Entity', cmd=Forge.core.Process.partial( self.execute, ui ), w=size[0]/2 - 15, h=25 )
 		button_abort = Abutton( name='Abort', cmd=self.window.close, w=size[0]/2 - 15, h=25 )
 
 		# defind layouts content

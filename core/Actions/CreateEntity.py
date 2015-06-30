@@ -4,15 +4,17 @@ import Forge.core
 
 class CreateEntity( BaseAction.BaseAction ):
 
-	def _doUi( self, entity, arg ):
+	def _doUi( self, entity, arg, ui ):
 		import Hammer.ui
 		self.popup = Hammer.ui.WindowCreateEntity(
 			cmd=Forge.core.Process.partial( self._doAction, entity ),
+			arg=arg,
+			ui=ui,
 			)
 
 		self.popup.show()
 
-	def _doAction( self, entity, arg ):
+	def _doAction( self, entity, arg, ui ):
 
 		self.path = [
 			arg['name']['value'] + '/',
@@ -38,7 +40,7 @@ class CreateEntity( BaseAction.BaseAction ):
 			self.ask = Hammer.ui.WindowAsk(
 				title='Entity already exist.',
 				issue='This entity already exist. You need to change the name. Retry?',
-				cmdYes=Forge.core.Process.partial( self._doUi, entity, None ),
+				cmdYes=Forge.core.Process.partial( self._doUi, entity, None, None ),
 				)
 			self.ask.show()
 

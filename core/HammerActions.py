@@ -14,7 +14,7 @@ def getActions( entity, entityType=None ):
 	for fnMethod in dir( HFn ):
 		if fnMethod == 'Fn%s' %( currentEntityType ):
 			classFn = eval( 'HFn.%s' %(fnMethod) )
-			return classFn( entity=entity )._fn
+			return classFn( entity=entity, arg={}, ui=None )._fn
 
 
 class Database():

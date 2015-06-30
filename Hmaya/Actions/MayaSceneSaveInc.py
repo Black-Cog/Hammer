@@ -5,7 +5,7 @@ import Hammer.core.Actions.BasePublishAction
 
 class MayaSceneSaveInc( Hammer.core.Actions.BasePublishAction ):
 
-	def _doPublish( self, entity, arg ):
+	def _doPublish( self, entity, arg, ui ):
 
 		import Hammer
 
@@ -23,7 +23,7 @@ class MayaSceneSaveInc( Hammer.core.Actions.BasePublishAction ):
 		Forge.core.System.mkdir( folder )
 
 		import maya.cmds
-		entityInfo = Hammer.Hmaya.Actions.GetEntitiesInfoFromScene( entity=entity, arg={'entityId':entity['entityId']} ).returnValue[0]
+		entityInfo = Hammer.Hmaya.Actions.GetEntitiesInfoFromScene( entity=entity, arg={'entityId':entity['entityId']}, ui=ui ).returnValue[0]
 		maya.cmds.setAttr( "%s.entityVersion" %(entityInfo), lock=False )
 		maya.cmds.setAttr( '%s.entityVersion' %(entityInfo), newVersion )
 		maya.cmds.setAttr( "%s.entityVersion" %(entityInfo), lock=True )

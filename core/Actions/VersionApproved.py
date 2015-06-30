@@ -4,7 +4,7 @@ import Forge.core.Process
 
 class VersionApproved( BaseAction.BaseAction ):
 
-	def _doAction( self, entity, arg ):
+	def _doAction( self, entity, arg, ui ):
 
 		import Hammer
 		newApproved = entity['approved']
@@ -17,5 +17,6 @@ class VersionApproved( BaseAction.BaseAction ):
 			value = True
 
 		newApproved[ entity['version'] ] = value
+		Hammer.Database().editEntity( entity['entityId'], approved=newApproved )
 
-		Hammer.Database().editEntity( entity, approved=newApproved )
+		ui._buildTreeEntity( entity['entityId'] )

@@ -5,7 +5,7 @@ import Anvil.core
 import WindowPopup
 
 class WindowExecute( WindowPopup.WindowPopup ):
-	def __init__( self, title=None, iconPath=None, size=[ 400, 100 ], entity=None, cmd=None, arg=None ):
+	def __init__( self, title=None, iconPath=None, size=[ 400, 100 ], entity=None, cmd=None, arg={}, ui=None ):
 
 		if not title:
 			title = 'Execute'
@@ -24,17 +24,17 @@ class WindowExecute( WindowPopup.WindowPopup ):
 		self._buildCustom( arg=arg )
 
 		# buttons init
-		button_open = Abutton( name='Execute', cmd=self.execute, w=size[0]/2 - 15, h=25 )
+		button_open = Abutton( name='Execute', cmd=Forge.core.Process.partial( self.execute, ui ), w=size[0]/2 - 15, h=25 )
 		button_abort = Abutton( name='Abort', cmd=self.window.close, w=size[0]/2 - 15, h=25 )
 
 		# defind layouts content
 		self.layout_main.add( [ button_open, button_abort ] )
 
-	def execute( self ):
+	def execute( self, ui ):
 		self.window.close()
 
 		if self._cmd:
-			cmd = Forge.core.Process.partial( self._cmd, self._queryCustom() )
+			cmd = Forge.core.Process.partial( self._cmd, self._queryCustom(), ui )
 			cmd()
 
 	def _buildCustom( self, arg ):

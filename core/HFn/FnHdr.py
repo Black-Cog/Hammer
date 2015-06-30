@@ -5,7 +5,7 @@ import Hammer.core
 import FnBaseEntity
 
 class FnHdr( FnBaseEntity.FnBaseEntity ):
-	def __init__( self, entity ):
+	def __init__( self, entity, arg, ui ):
 		self.initFn()
 
 		self.__interreter = Forge.core.System().interpreter()
@@ -18,18 +18,17 @@ class FnHdr( FnBaseEntity.FnBaseEntity ):
 
 		self._fn.append( self.openSourceScene )
 
-	def publish( self, entity ):
-		self.publish = Hammer.core.Actions.HdrPublish( ui=True, entity=entity )
+	def publish( self, entity, arg, ui ):
+		self.publish = Hammer.core.Actions.HdrPublish( window=True, entity=entity, arg=arg, ui=ui )
 
-	def get( self, entity ):
+	def get( self, entity, arg, ui ):
 		print 'get : %s' %( str(entity) )
 
-	def openSourceScene( self, entity ):
-		args = {}
+	def openSourceScene( self, entity, arg, ui ):
 		if self.__interreter == 'Nuke8.0':
-			args['newSession'] = {
+			arg['newSession'] = {
 									'type' : 'bool',
 									'value' : True,
 								}
 
-		self.openSourceScene = Hammer.core.Actions.BaseEntityOpenSourceScene( ui=True, entity=entity, arg=args )
+		self.openSourceScene = Hammer.core.Actions.BaseEntityOpenSourceScene( window=True, entity=entity, arg=arg, ui=ui )

@@ -4,18 +4,19 @@ import BaseAction
 
 class BaseEntityOpenScene( BaseAction.BaseAction ):
 
-	def _doUi( self, entity, arg ):
+	def _doUi( self, entity, arg, ui ):
 		import Hammer.ui
 
 		self.popup = Hammer.ui.WindowOpen(
 			entity=entity,
 			cmd=Forge.core.Process.partial( self._doAction, entity ),
 			arg=arg,
+			ui=ui,
 		 )
 
 		self.popup.show()
 
-	def _doAction( self, entity, arg ):
+	def _doAction( self, entity, arg, ui ):
 
 		extension = 'unknow'
 		if entity['entityType'] == 'MayaScene':

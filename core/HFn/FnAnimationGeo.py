@@ -5,7 +5,7 @@ import Hammer.core
 import FnBaseEntity
 
 class FnAnimationGeo( FnBaseEntity.FnBaseEntity ):
-	def __init__( self, entity ):
+	def __init__( self, entity, arg, ui ):
 		self.initFn()
 
 		self.__interpreter = Forge.core.System().interpreter()
@@ -17,21 +17,20 @@ class FnAnimationGeo( FnBaseEntity.FnBaseEntity ):
 
 		self._fn.append( self.openSourceScene )
 
-	def publish( self, entity ):
+	def publish( self, entity, arg, ui ):
 		print 'publish : %s' %( str(entity) )
 
-	def get( self, entity ):
+	def get( self, entity, arg, ui ):
 		print 'get : %s' %( str(entity) )
 
-	def importEntity( self, entity ):
+	def importEntity( self, entity, arg, ui ):
 		print 'importEntity : %s' %( str(entity) )
 
-	def openSourceScene( self, entity ):
-		args = {}
+	def openSourceScene( self, entity, arg, ui ):
 		if self.__interreter == 'maya':
-			args['newSession'] = {
+			arg['newSession'] = {
 									'type' : 'bool',
 									'value' : True,
 								}
 
-		self.openSourceScene = Hammer.core.Actions.BaseEntityOpenSourceScene( ui=True, entity=entity, arg=args )
+		self.openSourceScene = Hammer.core.Actions.BaseEntityOpenSourceScene( window=True, entity=entity, arg=arg, ui=ui )
