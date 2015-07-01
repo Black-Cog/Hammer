@@ -133,11 +133,12 @@ class Project():
 		if entityId:
 			entity = Hammer.getEntity( entityId )
 			actions = Hammer.getActions( entity )
+			arg = {}
 
 			parent.clean()
 			if actions:
 				for action in actions:
-					parent.add( Anvil.core.Button(name=action.__name__, cmd=Forge.core.Process.partial(action, entity), w=110) )
+					parent.add( Anvil.core.Button(name=action.__name__, cmd=Forge.core.Process.partial( action, entity, arg, self ), w=110) )
 
 	def menuBar( self, tree ):
 		entityId = tree.getCurrentItemId()

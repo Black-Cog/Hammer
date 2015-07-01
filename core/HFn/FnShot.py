@@ -3,10 +3,10 @@ import FnBaseEntity
 import Hammer
 
 class FnShot( FnBaseEntity.FnBaseEntity ):
-	def __init__( self, entity ):
+	def __init__( self, entity, arg, ui ):
 		self.initFn()
 		self._fn.append( self.createEntity )
 
-	def createEntity( self, entity ):
+	def createEntity( self, entity, arg, ui ):
 
-		self.openSourceScene = Hammer.core.Actions.CreateEntity( ui=True, entity=entity )
+		self.openSourceScene = Hammer.core.Actions.CreateEntity( window=True, entity=entity, arg=arg, ui=ui )

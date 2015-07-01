@@ -5,7 +5,7 @@ import Hammer.core.Actions.BasePublishAction
 
 class NukeSceneSaveInc( Hammer.core.Actions.BasePublishAction ):
 
-	def _doPublish( self, entity, arg ):
+	def _doPublish( self, entity, arg, ui ):
 
 		import Hammer
 
@@ -15,7 +15,7 @@ class NukeSceneSaveInc( Hammer.core.Actions.BasePublishAction ):
 		newVersion = len( entity['approved'] )
 
 		# set current version
-		Hammer.Database().editEntity( entity, version=newVersion )
+		Hammer.Database().editEntity( entity['entityId'], version=newVersion )
 
 		folder = '%s/%s/' %( entity['path'], str(newVersion*10).zfill(4) )
 		path = '%s/scene.nk' %( folder )
@@ -23,7 +23,7 @@ class NukeSceneSaveInc( Hammer.core.Actions.BasePublishAction ):
 		Forge.core.System.mkdir( folder )
 
 		import nuke
-		entityInfo = Hammer.Hnuke.Actions.GetEntitiesInfoFromScene( entity=entity, arg={'entityId':entity['entityId']} ).returnValue[0]
+		entityInfo = Hammer.Hnuke.Actions.GetEntitiesInfoFromScene( entity=entity, arg={'entityId':entity['entityId']}, ui=ui ).returnValue[0]
 		entityInfo.knob('entityVersion').setValue( newVersion )
 
 		nuke.scriptSaveAs( filename=path )

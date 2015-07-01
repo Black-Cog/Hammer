@@ -78,19 +78,32 @@ class _Version():
 		layout_sceneContent = Alayout( parent=parent, w=size[0], h=size[1] )
 		layout_menuBar = Alayout( parent=box_menuBar )
 
+		# buttons init
+		button_refresh = Anvil.core.Button(
+							name='',
+							cmd=Forge.core.Process.partial( self._buildTreeEntity, entity['entityId'] ),
+							w=25,
+							h=25,
+							icon='../core/icon/refresh.png',
+							iconSize=[25, 25],
+							)
+
 		# tree init
 		self.tree_hierarchy = Anvil.core.Tree( w=size[0]*0.75-20, h=size[1]-20 )
-		self._buildTreeEntity( entity=entity )
+		self._buildTreeEntity( entityId=entity['entityId'] )
 
 		# defind layouts content
+		layout_sceneContent.add( button_refresh )
 		layout_sceneContent.add( [ self.tree_hierarchy, box_menuBar ] )
 
 		# signals
-		self.tree_hierarchy.signalRightClick.connect( lambda: self.menuBar(self.tree_hierarchy) )
-		self.tree_hierarchy.signalLeftClick.connect( lambda: self.__addActionsToMenuBar(self.tree_hierarchy, layout_menuBar) )
+		self.tree_hierarchy.signalRightClick.connect( Forge.core.Process.partial(self.menuBar, self.tree_hierarchy) )
+		self.tree_hierarchy.signalLeftClick.connect( Forge.core.Process.partial(self.__addActionsToMenuBar, self.tree_hierarchy, layout_menuBar) )
 
 
-	def _buildTreeEntity( self, entity ):
+	def _buildTreeEntity( self, entityId ):
+
+		entity = Hammer.getEntity( entityId )
 
 		hierarchyList = []
 
@@ -136,12 +149,13 @@ class _Version():
 			entity.setVersion( version=version )
 			actions = Hammer.getActions( entity, 'Version' )
 			actions += Hammer.getActions( entity )
+			arg = {}
 
 			parent.clean()
 			if actions:
 				for action in actions:
 					if action.__name__ in [ 'approved', 'setCurrent', 'openScene', 'openSourceScene', 'get' ]:
-						parent.add( Anvil.core.Button(name=action.__name__, cmd=Forge.core.Process.partial(action, entity), w=110) )
+						parent.add( Anvil.core.Button(name=action.__name__, cmd=Forge.core.Process.partial( action, entity, arg, self ), w=110) )
 
 	def menuBar( self, tree ):
 		entityId = tree.getCurrentItemId()

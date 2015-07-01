@@ -1,17 +1,17 @@
 
 
 class BaseAction():
-	def __init__( self, ui=False, entity=None, arg=None ):
+	def __init__( self, window=False, entity=None, arg={}, ui=None ):
 
 		self.returnValue = None
 
-		if ui:
-			self._doUi( entity=entity, arg=arg )
+		if window:
+			self._doUi( entity=entity, arg=arg, ui=ui )
 		else:
-			self._doAction( entity=entity, arg=arg )
+			self._doAction( entity=entity, arg=arg, ui=ui )
 
-	def _doUi( self, entity, arg ):
+	def _doUi( self, entity, arg, ui ):
 		pass
 
-	def _doAction( self, entity, arg ):
+	def _doAction( self, entity, arg, ui ):
 		pass

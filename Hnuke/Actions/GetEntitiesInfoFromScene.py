@@ -3,7 +3,7 @@ import Hammer.core.Actions.BaseAction
 
 class GetEntitiesInfoFromScene( Hammer.core.Actions.BaseAction ):
 
-	def _doAction( self, entity, arg ):
+	def _doAction( self, entity, arg, ui ):
 
 		import nuke
 		import Hammer

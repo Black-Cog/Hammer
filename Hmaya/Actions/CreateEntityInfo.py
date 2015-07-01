@@ -3,7 +3,7 @@ import Hammer.core.Actions.BaseAction
 
 class CreateEntityInfo( Hammer.core.Actions.BaseAction ):
 
-	def _doAction( self, entity, arg ):
+	def _doAction( self, entity, arg, ui ):
 
 		import maya.cmds
 

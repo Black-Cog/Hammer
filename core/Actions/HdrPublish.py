@@ -5,6 +5,6 @@ import BasePublishAction
 
 class HdrPublish( BasePublishAction.BasePublishAction ):
 
-	def _doPublish( self, entity, arg ):
+	def _doPublish( self, entity, arg, ui ):
 		print 'Hdr Publish'
 

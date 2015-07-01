@@ -5,7 +5,7 @@ import Hammer.core
 import FnBaseEntity
 
 class FnNukeScene( FnBaseEntity.FnBaseEntity ):
-	def __init__( self, entity ):
+	def __init__( self, entity, arg, ui ):
 		self.initFn()
 
 		self.__interreter = Forge.core.System().interpreter()
@@ -17,16 +17,15 @@ class FnNukeScene( FnBaseEntity.FnBaseEntity ):
 			if entitiesLoad and entitiesLoad[0]['entityId'] == entity['entityId']:
 				self._fn.append( self.saveInc )
 
-	def openScene( self, entity ):
-		args = {}
+	def openScene( self, entity, arg, ui ):
 		if self.__interreter == 'Nuke8.0':
-			args['newSession'] = {
+			arg['newSession'] = {
 									'type' : 'bool',
 									'value' : True,
 								}
 
-		self.openScene = Hammer.core.Actions.BaseEntityOpenScene( ui=True, entity=entity, arg=args )
+		self.openScene = Hammer.core.Actions.BaseEntityOpenScene( window=True, entity=entity, arg=arg, ui=ui )
 
-	def saveInc( self, entity ):
+	def saveInc( self, entity, arg, ui ):
 
-		self.saveInc = Hammer.Hnuke.Actions.NukeSceneSaveInc( ui=True, entity=entity )
+		self.saveInc = Hammer.Hnuke.Actions.NukeSceneSaveInc( window=True, entity=entity, arg=arg, ui=ui )

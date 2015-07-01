@@ -10,11 +10,11 @@ class FnBaseEntity():
 					self.rename,
 					]
 
-	def property( self, entity ):
-		self.baseEntityProperty = Hammer.core.Actions.BaseEntityProperty( ui=True, entity=entity )
+	def property( self, entity, arg, ui ):
+		self.baseEntityProperty = Hammer.core.Actions.BaseEntityProperty( window=True, entity=entity, arg=arg, ui=ui )
 
-	def delete( self, entity ):
-		self.baseEntitydelete = Hammer.core.Actions.BaseEntityDelete( ui=True, entity=entity )
+	def delete( self, entity, arg, ui ):
+		self.baseEntitydelete = Hammer.core.Actions.BaseEntityDelete( window=True, entity=entity, arg=arg, ui=ui )
 
-	def rename( self, entity ):
+	def rename( self, entity, arg, ui ):
 		print 'rename : %s' %( str(entity) )

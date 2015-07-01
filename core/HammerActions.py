@@ -14,7 +14,7 @@ def getActions( entity, entityType=None ):
 	for fnMethod in dir( HFn ):
 		if fnMethod == 'Fn%s' %( currentEntityType ):
 			classFn = eval( 'HFn.%s' %(fnMethod) )
-			return classFn( entity=entity )._fn
+			return classFn( entity=entity, arg={}, ui=None )._fn
 
 
 class Database():
@@ -257,7 +257,11 @@ class Database():
 		with open( self.db, 'w' ) as file:
 			file.writelines( data )
 
-	def editEntity( self, entity, version=None, approved=None ):
+	def editEntity( self, entityId, version=None, approved=None ):
+		import Hammer
+
+		entity = Hammer.getEntity( entityId )
+
 		newVersion = entity['version']
 		if version:
 			newVersion = version
@@ -280,7 +284,7 @@ class Database():
 					'path':entity['path'],
 					'version':newVersion,
 					'descriptions':entity['descriptions'],
-					'approved':entity['approved'],
+					'approved':newApproved,
 					'currentUser':entity['currentUser'],
 					'parentId':entity['parentId'],
 					'childrenId':entity['childrenId'],
